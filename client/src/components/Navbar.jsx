@@ -14,9 +14,12 @@ const Navbar = () => {
       />
       <button
         onClick={() => navigate("/admin")}
-        className="flex items-center gap-2 rounded-full text-sm cursor-pointer bg-primary text-white px-10 py-2.5">
+        className="flex items-center gap-2 rounded-full text-sm font-medium cursor-pointer 
+             bg-primary text-white px-10 py-2.5 shadow-md 
+             hover:bg-primary/80 hover:shadow-xl hover:shadow-primary/50 
+             transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95">
         Login
-        <img src={assets.arrow} className="w-3" alt="arrow" />
+        <img src={assets.arrow} className="w-3" alt="login arrow" />
       </button>
     </div>
   );
