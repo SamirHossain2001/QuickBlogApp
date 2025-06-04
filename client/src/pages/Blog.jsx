@@ -4,6 +4,7 @@ import { assets, blog_data, comments_data } from "../assets/assets";
 import Navbar from "../components/Navbar";
 import Moment from "moment";
 import Footer from "../components/Footer";
+import Loader from "../components/Loader";
 
 const Blog = () => {
   const { id } = useParams();
@@ -113,16 +114,31 @@ const Blog = () => {
             Share this article on social media
           </p>
           <div className="flex">
-            <img src={assets.facebook_icon} width={50} alt="" />
-            <img src={assets.twitter_icon} width={50} alt="" />
-            <img src={assets.googleplus_icon} width={50} alt="" />
+            <img
+              className="hover:scale-105 cursor-pointer"
+              src={assets.facebook_icon}
+              width={50}
+              alt="facebook icon"
+            />
+            <img
+              className="hover:scale-105 cursor-pointer"
+              src={assets.twitter_icon}
+              width={50}
+              alt="twitter icon"
+            />
+            <img
+              className="hover:scale-105 cursor-pointer"
+              src={assets.googleplus_icon}
+              width={50}
+              alt="google icon"
+            />
           </div>
         </div>
       </div>
       <Footer />
     </div>
   ) : (
-    <div>Loading...</div>
+    <Loader />
   );
 };
 
