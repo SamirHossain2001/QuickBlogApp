@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useRef } from "react";
 import { assets } from "../assets/assets";
+import { useAppContext } from "../context/AppContext";
 
 const Header = () => {
+  const { setInput, input } = useAppContext();
+  const inputRef = useRef();
+
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    setInput(inputRef.current.value);
+  };
+
+  const onClear = () => {
+    setInput("");
+    inputRef.current.value = "";
+  };
+
   return (
     <div className="mx-8 sm:mx-16 xl:mx-24 relative">
       <div className="text-center mt-10 md:mt-20 mb-4 md:mb-8">
@@ -21,9 +35,12 @@ const Header = () => {
         </p>
 
         {/* Search bar */}
-        <form className="flex justify-between max-w-lg max-sm:scale-75 mx-auto border border-gray-300 bg-white rounded-lg overflow-hidden">
+        <form
+          onSubmit={onSubmitHandler}
+          className="flex justify-between max-w-lg max-sm:scale-75 mx-auto border border-gray-300 bg-white rounded-lg overflow-hidden">
           <input
             type="text"
+            ref={inputRef}
             placeholder="Search for blogs"
             required
             className="w-full pl-4 outline-none text-gray-600"
@@ -34,6 +51,15 @@ const Header = () => {
             Search
           </button>
         </form>
+      </div>
+      <div className="text-center">
+        {input && (
+          <button
+            onClick={onClear}
+            className="border border-primary text-primary bg-primary/10 font-semibold text-xs py-1 px-3 rounded shadow-sm cursor-pointer">
+            Clear Search
+          </button>
+        )}
       </div>
       <img
         src={assets.gradientBackground}
