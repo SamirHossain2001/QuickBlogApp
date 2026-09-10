@@ -1,7 +1,6 @@
 import fs from "fs";
 import mongoose from "mongoose";
 import imagekit from "../configs/imageKit.js";
-import { sanitizeBlogHtml } from "../configs/sanitize.js";
 import Blog from "../models/Blog.js";
 import Comment from "../models/Comment.js";
 import main from "../configs/gemini.js";
@@ -39,7 +38,7 @@ export const addBlog = async (req, res) => {
     await Blog.create({
       title,
       subTitle,
-      description: sanitizeBlogHtml(description),
+      description,
       category,
       image,
       isPublished,
