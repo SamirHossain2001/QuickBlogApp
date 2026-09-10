@@ -1,17 +1,43 @@
 import express from "express";
 import "dotenv/config";
 import cors from "cors";
+import helmet from "helmet";
 import connectDB from "./configs/db.js";
 import adminRouter from "./routes/adminRoutes.js";
 import blogRouter from "./routes/blogRoutes.js";
+import { apiLimiter } from "./middleware/rateLimiter.js";
 
 const app = express();
 
 await connectDB();
 
-// Middlewares
-app.use(cors());
-app.use(express.json());
+app.set("trust proxy", 1);
+
+app.use(helmet());
+
+const allowedOrigins = (process.env.CLIENT_URL || "")
+  .split(",")
+  .map((o) => o.trim())
+  .filter(Boolean);
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (
+        !origin ||
+        allowedOrigins.length === 0 ||
+        allowedOrigins.includes(origin)
+      ) {
+        return callback(null, true);
+      }
+      return callback(new Error("Not allowed by CORS"));
+    },
+  }),
+);
+
+app.use(express.json({ limit: "1mb" }));
+
+app.use(apiLimiter);
 
 // Routes
 app.get("/", (req, res) => res.send("API is working"));

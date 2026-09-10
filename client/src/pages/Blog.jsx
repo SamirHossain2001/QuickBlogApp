@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import Loader from "../components/Loader";
 import { useAppContext } from "../context/AppContext";
 import toast from "react-hot-toast";
+import DOMPurify from "dompurify";
 
 const Blog = () => {
   const { id } = useParams();
@@ -92,7 +93,9 @@ const Blog = () => {
         <img src={data.image} alt={data.title} className="rounded-3xl mb-5" />
         <div
           className="rich-text max-w-3xl mx-auto"
-          dangerouslySetInnerHTML={{ __html: data.description }}></div>
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(data.description),
+          }}></div>
         {/* Comments section */}
         <div className="mt-14 mb-10 max-w-3xl mx-auto">
           <p className="font-semibold mb-4">Comments ({comments.length})</p>
