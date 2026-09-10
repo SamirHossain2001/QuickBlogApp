@@ -1,19 +1,13 @@
 import express from "express";
 import "dotenv/config";
 import cors from "cors";
-import helmet from "helmet";
 import connectDB from "./configs/db.js";
 import adminRouter from "./routes/adminRoutes.js";
 import blogRouter from "./routes/blogRoutes.js";
-import { apiLimiter } from "./middleware/rateLimiter.js";
 
 const app = express();
 
 await connectDB();
-
-app.set("trust proxy", 1);
-
-app.use(helmet());
 
 const allowedOrigins = (process.env.CLIENT_URL || "")
   .split(",")
@@ -36,8 +30,6 @@ app.use(
 );
 
 app.use(express.json({ limit: "1mb" }));
-
-app.use(apiLimiter);
 
 // Routes
 app.get("/", (req, res) => res.send("API is working"));
