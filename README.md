@@ -43,7 +43,7 @@ Visitors read and comment on posts. The admin writes articles, generates drafts 
 
 | Layer    | Technologies                                                                                     |
 | :------- | :----------------------------------------------------------------------------------------------- |
-| Frontend | React 19, Vite 6, React Router 7, Tailwind CSS 4, Axios, Quill, marked, DOMPurify, Framer Motion |
+| Frontend | React 19, Vite 6, React Router 7, Tailwind CSS 4, Axios, Quill, marked, DOMPurify, Framer Motion, Moment.js, SweetAlert2, react-hot-toast |
 | Backend  | Node.js, Express 5, MongoDB, Mongoose 8, JSON Web Tokens, Multer                                 |
 | Services | Google Gemini (`@google/genai`), ImageKit                                                        |
 | Hosting  | Vercel (client and server deployed as separate projects)                                         |
